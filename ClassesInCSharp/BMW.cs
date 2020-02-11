@@ -7,8 +7,9 @@ namespace ClassesInCSharp
      public class   BMW:Car
     {
         public Fuel fuel ;
-        int i;
+        
         public BMW() { }
+
         protected int designcost;
 
         public BMW(int enginepower, double engineVolume, string color, int designcost)
@@ -30,6 +31,11 @@ namespace ClassesInCSharp
                 price = enginepower * (int)engineVolume *1.5 + designcost;
             }
             return price;
+        }
+
+        public double Price()
+        {
+            return designcost * enginepower;
         }
             
     }

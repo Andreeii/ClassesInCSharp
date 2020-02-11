@@ -11,8 +11,10 @@ namespace ClassesInCSharp
 
 
             BMW bmwx3 = new BMW(5, 3.5,"red",1000);
+            BMW bmwx5 = new BMW(6, 3.5, "blue", 1500);
 
-            Console.WriteLine("price for this car is "+bmwx3.Price(fuel1));
+            Console.WriteLine("Calculating price for bmwx3: "+bmwx3.Price(fuel1));
+            Console.WriteLine("Calculating price for bmwx5: " + bmwx5.Price());
             
         }
     }
