@@ -1,42 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace ClassesInCSharp
 {
-     public class   BMW:Car
+     public class   BMW: Car,IEqualityComparer<BMW>
     {
-        public Fuel fuel ;
-        
+        //nullable type field, deign cost can be null
+        protected int? designcost;
+
+        //parameterlessConstructor
         public BMW() { }
 
-        protected int designcost;
-
-        public BMW(int enginepower, double engineVolume, string color, int designcost)
-            : base(enginepower,engineVolume,color)
+        //constructor with parameter
+        public BMW(int id, string name ,int enginepower, double engineVolume, string color, int? designcost)
+            : base(name,enginepower,engineVolume,color)
         {
-           
+            base.ID = id;
             this.designcost = designcost;
         }
 
+        public bool Equals([AllowNull] BMW x, [AllowNull] BMW y)
+        {
+            return x.Enginepower == y.Enginepower && x.EngineVolume == y.EngineVolume;
+        }
+
+        public int GetHashCode([DisallowNull] BMW obj)
+        {
+            return obj.GetHashCode();
+        }
+
+
+        //first method for calculating price
         public  override double Price(Fuel f)
         {
             double price;
-            if (f.fueltype == type.diesel)
+            if (designcost.HasValue)
             {
-                price = enginepower * (int)engineVolume *1.3 + designcost;
+                if (f.fueltype == type.diesel)
+                {
+                    price = Enginepower * (int)EngineVolume * 2.3 + (int)designcost;
+                }
+                else
+                {
+                    price = Enginepower * (int)EngineVolume * 2.5 + (int)designcost;
+                }
+
+            }
+            else if(f.fueltype ==type.diesel)
+            {
+                price = Enginepower * (int)EngineVolume * 2.3;
             }
             else
             {
-                price = enginepower * (int)engineVolume *1.5 + designcost;
+                price = Enginepower * (int)EngineVolume * 2.5;
             }
             return price;
         }
 
-        public double Price()
+        //second method for calculating price
+        public  double Price()
         {
-            return designcost * enginepower;
+            if (designcost.HasValue)
+            {
+                return Enginepower * (int)EngineVolume * 1.1 + (int)designcost;
+            }
+            else
+            {
+                return Enginepower * (int)EngineVolume * 1.1;
+
+            }
         }
-            
+
+
+        //to string method
+        public override string ToString()
+        {
+            return "Brand: BMW  ," + "Name: "+this.Name;
+        }
     }
 }
