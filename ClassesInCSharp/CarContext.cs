@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ClassesInCSharp
 {
-    public partial class CarContext:DbContext
+    public partial class CarContext : DbContext
     {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -15,10 +15,17 @@ namespace ClassesInCSharp
 
         }
 
+        public DbSet<Engine> Engines { get; set; }
 
         public DbSet<BenzineEngine> Benzins { get; set; }
         public DbSet<DieselEngine> Diesels { get; set; }
-        public DbSet<Engine> Engines { get; set; }
+
+        public DbSet<LuxuryCar>LuxuryCars{get;set;}
+
+        public DbSet<SportCar> SportCars { get; set; }
+
+        public DbSet<ArmyCar> ArmyCars { get; set; }
+        public DbSet<Car> Cars{get;set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

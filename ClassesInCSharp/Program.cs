@@ -9,36 +9,26 @@ namespace ClassesInCSharp
         static void Main(string[] args)
         {
 
-            var bmwx3 = new BMW
+            var hammer = new ArmyCar()
             {
-                Color = "Green",
-                Name = "bmwx6",
-                Enginepower = 234,
-                EngineVolume = 3.2,
-                designcost = 5000,
-                BMWCharacteristic1 = "first caracteristic",
-                BMWCharacteristic2 = "second caracteristic"
+                Colour = "Yellow",
+                Price = 20000,
+                Engine = new DieselEngine()
+                {
+                    EngineVolume = 3.2,
+                    BrandName = "v6",
+                    FuelType = new Fuel(diesel,12),
 
+                }
             };
 
 
-            var audi1 = new Audi
-            {
-                Color = "Green",
-                Name = "audiA3",
-                Enginepower = 234,
-                EngineVolume = 3.2,
-                designcost = 5000,
-                AudiCaracteristic1 = "first caracteristic",
-                AudiCaracteristic2 = "second caracteristic"
+            
 
-            };
             using (var contextC = new CarContext())
             {
 
 
-                contextC.Add(audi1);
-                contextC.Add(bmwx3);
 
                 contextC.SaveChanges();
             }
